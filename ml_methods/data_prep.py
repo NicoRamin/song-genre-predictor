@@ -27,18 +27,19 @@ def one_hot_encode(songs_df:pd.DataFrame) -> pd.DataFrame:
 
 def add_authors_as_features(songs_df:pd.DataFrame, n_features:int) -> pd.DataFrame:
     # Replace ; for spaces in the artists column (; used to separate multiple artists in the dataset)
-    tmp = [artist.replace(";", " ") if artist else None for artist in songs_df['artists']]
-    songs_df['artists'] = tmp
+    df_copy = songs_df.copy()
+    tmp = [artist.replace(";", " ") if artist else None for artist in df_copy['artists']]
+    df_copy['artists'] = tmp
     
     # tmp = [_remove_stopwords(artist) for artist in songs_df['artists']]
     # songs_df['artists'] = tmp
-    songs_df['artists'] = songs_df['artists'].apply(remove_stopwords)
+    df_copy['artists'] = df_copy['artists'].apply(remove_stopwords)
     artists_vectorizer = TfidfVectorizer(max_features=n_features)
-    artists_matrix = artists_vectorizer.fit_transform(songs_df['artists'])
+    artists_matrix = artists_vectorizer.fit_transform(df_copy['artists'])
     artists_df = pd.DataFrame(artists_matrix.toarray(), columns=artists_vectorizer.get_feature_names_out())
-    songs_df.reset_index(drop=True, inplace=True)
+    df_copy.reset_index(drop=True, inplace=True)
     artists_df.reset_index(drop=True, inplace=True)
-    final_df = pd.concat([songs_df, artists_df], axis=1)
+    final_df = pd.concat([df_copy, artists_df], axis=1)
     return final_df
 
 def add_album_and_track_name_as_features(songs_df:pd.DataFrame, n_features:int) -> pd.DataFrame:

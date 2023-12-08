@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import re
 
 
 def one_hot_encode(songs_df:pd.DataFrame) -> pd.DataFrame:
@@ -25,7 +24,7 @@ def one_hot_encode(songs_df:pd.DataFrame) -> pd.DataFrame:
     final_df = pd.concat([songs_df, onehot_data.set_axis(songs_df.index)], axis=1)
     return final_df
 
-def add_authors_as_features(songs_df:pd.DataFrame, n_features:int) -> pd.DataFrame:
+def add_artists_as_features(songs_df:pd.DataFrame, n_features:int) -> pd.DataFrame:
     # Replace ; for spaces in the artists column (; used to separate multiple artists in the dataset)
     df_copy = songs_df.copy()
     tmp = [artist.replace(";", " ") if artist else None for artist in df_copy['artists']]

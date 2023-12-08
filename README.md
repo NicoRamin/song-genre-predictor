@@ -19,7 +19,7 @@ The contents of the repository are the following:
 * [clustering](clustering.ipynb) &rarr;  reduce the number of genres in the dataset to only 18 via a combination of agglomerative clustering and manual input
 * [data-cleaning](data-cleaning.ipynb) &rarr;  choose only one genre for every song in the dataset that appeared with multiple genres
 * [data-exploration](data-exploration.ipynb) &rarr; visualize the features of the dataset and propose preprocessing steps
-* [hyperparemter-optimization](optimization.ipynb) &rarr; hyperparameter optimization implemented using GridSearchCV
+* [hyperparemter-optimization](hyperparam-optim.ipynb) &rarr; hyperparameter optimization implemented using GridSearchCV
 * [plots](plots.ipynb) &rarr; generate plots for the report and presentation
 
 

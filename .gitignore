@@ -1,2 +1,3 @@
 test.ipynb
-__pycache__/
+__pycache__/*
+ml_methods/__pycache__/*
